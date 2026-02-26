@@ -7,7 +7,7 @@ import { sortBy } from 'lodash-es'
 import { computed, inject, onBeforeMount, ref } from 'vue'
 import IPhChartScatterBold from '~icons/ph/chart-scatter-bold'
 import { lotteryKey } from '../injection-keys'
-import ResultsHeatmapCardNumber from './ResultsHeatmapCardNumber.vue'
+import GeneralMapCardNumber from './GeneralMapCardNumber.vue'
 
 type SortValue = 'occurrences' | 'days'
 
@@ -59,7 +59,7 @@ onBeforeMount(() => {
       class: 'overflow-auto max-h-[calc(100vh-var(--spacing)*34)]',
     }"
   >
-    <template #header> Mapa de calor </template>
+    <template #header> Mapa geral </template>
 
     <template #body>
       <div class="mt-2 mb-4 flex gap-3">
@@ -85,7 +85,7 @@ onBeforeMount(() => {
           'grid-template-columns': `repeat(${lottery.numbers_per_line}, minmax(0, 1fr))`,
         }"
       >
-        <ResultsHeatmapCardNumber
+        <GeneralMapCardNumber
           v-for="number in computedNumbers"
           :key="`number-${number.number}`"
           :number="number"

@@ -2,8 +2,8 @@
 import { SidebarItemProps } from '@/layout/sidebar/MainSidebarItem.vue'
 import { DetailedNumberData, LotteryModel, LotteryResultModel, MainMetadata } from '@/types'
 import { computed, provide } from 'vue'
+import GeneralMapCard from './general-map/GeneralMapCard.vue'
 import { lotteryKey, lotteryNumbersKey } from './injection-keys'
-import ResultsHeatmapCard from './results-heatmap/ResultsHeatmapCard.vue'
 import ResultsListCard from './results-list/ResultsListCard.vue'
 
 const props = defineProps<{
@@ -24,7 +24,7 @@ provide(lotteryKey, props.lottery)
   <div class="flex h-[calc(100vh-var(--spacing)*14)]">
     <main class="flex-1">
       <div class="flex gap-4">
-        <ResultsHeatmapCard :numbers="numbers" />
+        <GeneralMapCard :numbers="numbers" />
 
         <ResultsListCard
           class="max-h-[calc(100vh-var(--spacing)*14)]"
