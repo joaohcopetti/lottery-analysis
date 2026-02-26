@@ -41,25 +41,40 @@ export function useLotteryNumber(number: ComputedRef<DetailedNumberData>) {
     lotteryStore.selectNumber(number.value.number)
   }
 
-  const numberElAttrs = computed<HTMLAttributes>(() => ({
-    class: [
-      NUMBER_CLASSES.DEFAULT,
-      {
-        'text-gray-200': isDark.value,
-        'text-gray-800': !isDark.value,
-        [NUMBER_CLASSES.HIGHLIGHTED]: isNumberHighlighted.value,
-        [NUMBER_CLASSES.SELECTED]: isNumberSelected.value,
-      },
-    ],
-    style: {
-      backgroundColor: heatColor.value,
-    },
-    onFocusin: highlightNumber,
-    onFocusout: unhighlightNumber,
-    onMouseover: highlightNumber,
-    onMouseleave: unhighlightNumber,
-    onClick: toggleNumberSelect,
-  }))
+  const numberElAttrs = computed<HTMLAttributes>(() => {
+    const classes: any = [NUMBER_CLASSES.DEFAULT]
+    const style: HTMLAttributes['style'] = {}
+
+    if (lotteryStore.isHeatmapEnabled) {
+      classes.push(isDark.value ? 'text-gray-200' : 'text-gray-800')
+    }
+
+    if (!lotteryStore.isHeatmapEnabled) {
+      classes.push(' bg-gray-200')
+    }
+
+    if (lotteryStore.isHeatmapEnabled) {
+      style.backgroundColor = heatColor.value
+    }
+
+    if (isNumberHighlighted.value) {
+      classes.push(NUMBER_CLASSES.HIGHLIGHTED)
+    }
+
+    if (isNumberSelected.value) {
+      classes.push(NUMBER_CLASSES.SELECTED)
+    }
+
+    return {
+      class: classes,
+      style,
+      onFocusin: highlightNumber,
+      onFocusout: unhighlightNumber,
+      onMouseover: highlightNumber,
+      onMouseleave: unhighlightNumber,
+      onClick: toggleNumberSelect,
+    }
+  })
 
   return {
     heatColor,
