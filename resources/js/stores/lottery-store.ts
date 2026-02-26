@@ -4,6 +4,7 @@ import { ref } from 'vue'
 export const useLotteryStore = defineStore('lottery', () => {
   const highlightedNumber = ref<string>('')
   const selectedNumbers = ref<string[]>([])
+  const isHeatmapEnabled = ref<boolean>(false)
 
   const isHighlighted = (number: string) => number === highlightedNumber.value
   const isSelected = (number: string) => selectedNumbers.value.includes(number)
@@ -18,6 +19,10 @@ export const useLotteryStore = defineStore('lottery', () => {
     selectedNumbers.value.splice(index, 1)
   }
 
+  const setHeatmapEnabled = (value: boolean) => {
+    isHeatmapEnabled.value = value
+  }
+
   return {
     highlightedNumber,
     isHighlighted,
@@ -25,5 +30,7 @@ export const useLotteryStore = defineStore('lottery', () => {
     selectNumber,
     isSelected,
     deselectNumber,
+    isHeatmapEnabled,
+    setHeatmapEnabled,
   }
 })

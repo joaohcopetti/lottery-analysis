@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppCard from '@/components/card/AppCard.vue'
 import AppToggle from '@/components/toggle/AppToggle.vue'
+import { useLotteryStore } from '@/stores/lottery-store'
 import { DetailedNumberData, LotteryModel } from '@/types'
 import { useUrlSearchParams } from '@vueuse/core'
 import { sortBy } from 'lodash-es'
@@ -10,6 +11,8 @@ import { lotteryKey } from '../injection-keys'
 import GeneralMapCardNumber from './GeneralMapCardNumber.vue'
 
 type SortValue = 'occurrences' | 'days'
+
+const lotteryStore = useLotteryStore()
 
 const props = defineProps<{
   numbers: DetailedNumberData[]
@@ -44,9 +47,24 @@ const onSortChange = (value: boolean, type: SortValue) => {
   delete urlParams.sort
 }
 
+const onHeatmapChange = (value: boolean) => {
+  lotteryStore.setHeatmapEnabled(value)
+
+  if (value) {
+    urlParams.heatmap = 'true'
+    return
+  }
+
+  delete urlParams.heatmap
+}
+
 onBeforeMount(() => {
   if (urlParams.sort === 'occurrences' || urlParams.sort === 'days') {
     sort.value = urlParams.sort
+  }
+
+  if (urlParams.heatmap === 'true') {
+    lotteryStore.isHeatmapEnabled = true
   }
 })
 </script>
@@ -63,6 +81,13 @@ onBeforeMount(() => {
 
     <template #body>
       <div class="mt-2 mb-4 flex gap-3">
+        <AppToggle
+          :model-value="lotteryStore.isHeatmapEnabled"
+          label="Mapa de calor"
+          label-class="text-sm"
+          @update:model-value="onHeatmapChange"
+        />
+
         <AppToggle
           :model-value="sort === 'occurrences'"
           label="Ordenar por ocorrências"
