@@ -47,14 +47,11 @@ export function useLotteryNumber(number: ComputedRef<DetailedNumberData>) {
 
     if (lotteryStore.isHeatmapEnabled) {
       classes.push(isDark.value ? 'text-gray-200' : 'text-gray-800')
+      style.backgroundColor = heatColor.value
     }
 
     if (!lotteryStore.isHeatmapEnabled) {
-      classes.push(' bg-gray-200')
-    }
-
-    if (lotteryStore.isHeatmapEnabled) {
-      style.backgroundColor = heatColor.value
+      classes.push(' bg-gray-300')
     }
 
     if (isNumberHighlighted.value) {
