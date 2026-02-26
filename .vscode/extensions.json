@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "dbaeumer.vscode-eslint",
+        "vue.volar",
+        "sanderronde.phpstan-vscode",
+        "mehedidracula.php-namespace-resolver",
+        "devsense.phptools-vscode"
+    ]
+}

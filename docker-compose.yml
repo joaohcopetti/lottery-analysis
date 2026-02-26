@@ -1,0 +1,16 @@
+services:
+    app:
+        container_name: lottery-analysis-app
+        build:
+            context: ./docker/php
+        restart: unless-stopped
+        ports:
+            - ${FORWARD_SERVER_PORT:-8000}:8000
+        volumes:
+            - ./:/var/www
+            - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+        networks:
+            - lottery-analysis-network
+
+networks:
+    lottery-analysis-network:
