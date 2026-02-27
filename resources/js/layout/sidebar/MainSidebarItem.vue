@@ -17,8 +17,8 @@ defineEmits<{
 
 const isActive = computed(
   () =>
-    route().params.loteria === props.slug ||
-    (!route().params.loteria && props.slug === 'mega-sena'),
+    route().params.lottery === props.slug ||
+    (!route().params.lottery && props.slug === 'mega-sena'),
 )
 </script>
 
