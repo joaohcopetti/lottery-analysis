@@ -4,7 +4,15 @@ export default {
     'scope-enum': [
       2,
       'always',
-      ['llm', 'migration', 'main-controller', 'date-picker', 'dropdown', 'lint-config'],
+      [
+        'llm',
+        'migration',
+        'main-controller',
+        'date-picker',
+        'dropdown',
+        'lint-config',
+        'lottery-fetch',
+      ],
     ],
   },
 }
