@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\LotteriesEnum;
 use App\Models\Lottery;
+use App\Models\LotteryResult;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -47,23 +50,23 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $sidebarItems = [];
-
-        if ($this->isSidebarIncluded($request)) {
-            $sidebarItems = Cache::rememberForever(
-                'sidebar-items',
-                fn() => $this->getSidebarItems($request)
-            );
-        }
-
-        return [
+        $shared = [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
                 'user' => $request->user(),
             ],
-            'sidebar-items' => $sidebarItems
+            'metadata' => $this->getMetadata($request)
         ];
+
+        if ($this->isSidebarIncluded($request)) {
+            $shared['sidebar-items'] = Cache::rememberForever(
+                'sidebar-items',
+                fn() => $this->getSidebarItems($request)
+            );
+        }
+
+        return $shared;
     }
 
     private function isSidebarIncluded(Request $request): bool
@@ -79,7 +82,50 @@ class HandleInertiaRequests extends Middleware
         return Lottery::all()->map(fn($lottery) => [
             'label' => $lottery->label,
             'slug' => $lottery->slug,
-            'url' => route('main', $request->query())
+            'url' => route('main', [
+                ...$request->query(),
+                'lottery' => $lottery->slug
+            ])
         ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function getMetadata(Request $request): array
+    {
+        $slug = $request->query('lottery') ?? 'mega-sena';
+
+        [$oldestDrawDate, $newestDrawDate] = Cache::rememberForever(
+            "$slug:draw-dates",
+            function () use ($slug) {
+                $lottery = Lottery::firstWhere('slug', $slug);
+
+                assert(!!$lottery);
+
+                /**
+                 * @var Carbon
+                 */
+                $oldestDate = LotteryResult::where('lottery_id', $lottery->id)
+                    ->orderBy('date')
+                    ->first()
+                    ->date ?? Carbon::create(1990, 01, 01);
+
+                /**
+                 * @var Carbon
+                 */
+                $newestDate = LotteryResult::where('lottery_id', $lottery->id)
+                    ->orderByDesc('date')
+                    ->first()
+                    ->date ?? Carbon::now();
+
+                return [$oldestDate->format('Y-m-d'), $newestDate->format('Y-m-d')];
+            }
+        );
+
+        return [
+            'oldestDrawDate' => $oldestDrawDate,
+            'newestDrawDate' => $newestDrawDate
+        ];
     }
 }
