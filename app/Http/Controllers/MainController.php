@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lottery;
-use Inertia\Inertia;
 use App\Enums\LotteriesEnum;
-use Illuminate\Http\Request;
+use App\Http\Filters\LotteryResultsFilter;
+use App\Models\Lottery;
 use App\Models\LotteryResult;
+use App\Services\NumberDetailsService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use App\Services\NumberDetailsService;
-use App\Http\Filters\LotteryResultsFilter;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class MainController extends Controller
 {
@@ -27,10 +29,12 @@ class MainController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $this->validate($request);
+
         /**
          * @var string
          */
-        $slug = $request->query('loteria', static::$DEFAULT_LOTTERY);
+        $slug = $request->query('lottery', static::$DEFAULT_LOTTERY);
 
         $cacheKey = $this->getCacheKey($request, $slug);
 
@@ -54,25 +58,20 @@ class MainController extends Controller
             fn() => $this->numberDetailsService->getDetailedNumbers($results, $lottery)
         );
 
-        // $unluckyNumbers = Cache::rememberForever(
-        //     "unlucky-numbers:$cacheKey",
-        //     fn() => $this->numberDetailsService->getUnluckyNumbers($numbers)
-        // );
-
-
-        $minDate = LotteryResult::first()?->date?->format('Y-m-d');
-        $maxDate = LotteryResult::orderBy('date', 'desc')->first()?->date?->format('Y-m-d');
-
         return Inertia::render('main/MainPage', [
             'lottery' => $lottery,
             'results' => $results,
             'numbers' => $numbers,
-            // 'unluckyNumbers' => $unluckyNumbers,
-            'metadata' => [
-                'minDate' => $minDate,
-                'maxDate' => $maxDate,
-            ]
         ]);
+    }
+
+    private function validate(Request $request): void
+    {
+        $validLotteries = array_map(fn($case) => $case->value, LotteriesEnum::cases());
+
+        Validator::make($request->all(), [
+            'lottery' => [Rule::in($validLotteries)]
+        ])->validate();
     }
 
     private function getCacheKey(Request $request, string $slug): string
