@@ -29,7 +29,7 @@ const enabled = defineModel<boolean>({ default: false })
 
       <SwitchLabel
         v-if="label"
-        class="ml-3 cursor-pointer"
+        class="ml-3 cursor-pointer select-none"
         :class="labelClass"
       >
         {{ label }}
