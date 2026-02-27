@@ -52,7 +52,7 @@ class HandleInertiaRequests extends Middleware
         if ($this->isSidebarIncluded($request)) {
             $sidebarItems = Cache::rememberForever(
                 'sidebar-items',
-                fn() => $this->getSidebarItems()
+                fn() => $this->getSidebarItems($request)
             );
         }
 
@@ -74,12 +74,12 @@ class HandleInertiaRequests extends Middleware
     /**
      * @return Collection<int, array{label: string, slug: string, url: string}>
      */
-    private function getSidebarItems(): Collection
+    private function getSidebarItems(Request $request): Collection
     {
         return Lottery::all()->map(fn($lottery) => [
             'label' => $lottery->label,
             'slug' => $lottery->slug,
-            'url' => route('main', ['loteria' => $lottery->slug])
+            'url' => route('main', $request->query())
         ]);
     }
 }
