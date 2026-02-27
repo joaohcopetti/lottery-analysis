@@ -25,7 +25,7 @@ import MainSidebarItem from './MainSidebarItem.vue'
       leave-to-class="translate-y-1 opacity-0"
     >
       <PopoverPanel
-        class="absolute top-4 left-[calc(110px+10px)] z-20 h-[300px] w-[400px] rounded bg-white p-3 shadow-lg"
+        class="absolute top-4 left-[calc(110px+10px)] z-50 h-[300px] w-[400px] rounded bg-white p-3 shadow-lg"
       >
         <div
           class="absolute top-4 left-0 -translate-x-full border-8 border-t-transparent border-r-white border-b-transparent border-l-transparent"

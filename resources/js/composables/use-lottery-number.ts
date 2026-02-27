@@ -8,10 +8,10 @@ const NUMBER_CLASSES = {
   DEFAULT: 'transition-all',
   SHARED: 'outline-3 cursor-pointer',
   get HIGHLIGHTED() {
-    return this.SHARED + ' scale-110 outline-green-500 z-[150]'
+    return this.SHARED + ' scale-110 outline-green-500'
   },
   get SELECTED() {
-    return this.SHARED + ' outline-green-500 shadow-[0_0px_5px_5px] shadow-green-400 z-[100]'
+    return this.SHARED + ' outline-green-500 shadow-[0_0px_5px_5px] shadow-green-400'
   },
 }
 
