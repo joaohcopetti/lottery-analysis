@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { HTMLAttributes } from 'vue'
-import AppButton from '../button/AppButton.vue'
-import { AppButtonProps } from '../button/types'
+import AppButton, { AppButtonProps } from '../button/AppButton.vue'
 
 export type AppDropdownItem = {
   key: string
