@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { SidebarItemProps } from '@/layout/sidebar/MainSidebarItem.vue'
 import IMdiClover from 'virtual:icons/mdi/clover'
-import IPhFunnel from 'virtual:icons/ph/funnel-fill'
+import MainSidebarFilterItem from './MainSidebarFilterItem.vue'
 import SidebarItem from './MainSidebarItem.vue'
 
 defineProps<{
@@ -10,14 +10,8 @@ defineProps<{
 </script>
 
 <template>
-  <aside
-    class="fixed z-10 mt-10 flex h-full w-[110px] flex-col items-center overflow-auto bg-white shadow-xl"
-  >
-    <SidebarItem
-      label="Filtro"
-      slug="filter"
-      :icon="IPhFunnel"
-    />
+  <aside class="fixed z-10 mt-10 flex h-full w-[110px] flex-col items-center bg-white shadow-xl">
+    <MainSidebarFilterItem />
 
     <div class="h-0.5 w-full bg-gray-400" />
 
