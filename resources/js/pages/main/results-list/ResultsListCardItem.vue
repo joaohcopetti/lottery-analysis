@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppBadge from '@/components/badge/AppBadge.vue'
 import { dateToLocaleString } from '@/lib/utils'
 import { LotteryResultModel } from '@/types'
 import { computed } from 'vue'
@@ -23,7 +24,17 @@ const isAllEven = computed(() => props.result.even_count === numbersCount.value)
       'bg-amber-100': isAllOdd,
     }"
   >
-    <div class="text-xs font-bold text-gray-600">Concurso</div>
+    <div class="flex items-center gap-2">
+      <span class="text-xs font-bold text-gray-600">Concurso</span>
+
+      <AppBadge
+        v-if="isAllOdd || isAllEven"
+        size="sm"
+        :color="isAllOdd ? 'warning' : 'primary'"
+      >
+        {{ isAllOdd ? 'TODOS ÍMPARES' : 'TODOS PARES' }}
+      </AppBadge>
+    </div>
 
     <div>
       <span class="mr-1 font-semibold">{{ result.contest }}</span>
