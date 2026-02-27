@@ -80,9 +80,6 @@ provide(maxDateKey, props.maxDate)
 
     <hr class="my-3 border-gray-200" />
 
-    <CalendarTable
-      :max-date="maxDate"
-      :dates="dates"
-    />
+    <CalendarTable :dates="dates" />
   </div>
 </template>
