@@ -6,9 +6,11 @@ import AppInput from './AppInput.vue'
 
 defineProps<{
   datePickerProps?: InstanceType<typeof AppDatePicker>['$props']
+  label?: string
 }>()
 
 const selectedDate = defineModel<Date | undefined>()
+
 const onDateSelect = (value?: Date) => {
   selectedDate.value = value
 }
@@ -22,11 +24,15 @@ const inputValue = computed(() => selectedDate.value?.toLocaleDateString(navigat
     class="relative"
   >
     <PopoverButton class="w-full text-left">
-      <AppInput
-        v-bind="$attrs"
-        type="date"
-        :value="inputValue"
-      />
+      <label>
+        <div class="mb-0.5 text-sm font-semibold text-gray-600">{{ label }}</div>
+
+        <AppInput
+          v-bind="$attrs"
+          type="date"
+          :value="inputValue"
+        />
+      </label>
     </PopoverButton>
 
     <PopoverPanel
