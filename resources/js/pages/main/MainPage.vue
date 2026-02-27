@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SidebarItemProps } from '@/layout/sidebar/MainSidebarItem.vue'
-import { DetailedNumberData, LotteryModel, LotteryResultModel, MainMetadata } from '@/types'
+import { DetailedNumberData, LotteryModel, LotteryResultModel } from '@/types'
 import { computed, provide } from 'vue'
 import GeneralMapCard from './general-map/GeneralMapCard.vue'
 import { lotteryKey, lotteryNumbersKey } from './injection-keys'
@@ -9,7 +9,6 @@ import ResultsListCard from './results-list/ResultsListCard.vue'
 const props = defineProps<{
   results: LotteryResultModel[]
   numbers: DetailedNumberData[]
-  metadata: MainMetadata
   lottery: LotteryModel
   sidebarItems: SidebarItemProps[]
 }>()

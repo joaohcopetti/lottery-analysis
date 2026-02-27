@@ -30,8 +30,3 @@ export type CalendarDate = {
   month: number
   year: number
 }
-
-export type MainMetadata = {
-  minDate?: string
-  maxDate?: string
-}

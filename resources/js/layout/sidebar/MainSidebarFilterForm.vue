@@ -2,13 +2,28 @@
 import { useRoute } from '@/../../vendor/tightenco/ziggy'
 import AppButton from '@/components/button/AppButton.vue'
 import AppInputDate from '@/components/input/AppInputDate.vue'
-import { useForm } from '@inertiajs/vue3'
-import { onMounted } from 'vue'
+import { useForm, usePage } from '@inertiajs/vue3'
+import { computed, onMounted } from 'vue'
+
+const page = usePage<{
+  metadata: {
+    oldestDrawDate: string
+    newestDrawDate: string
+  }
+}>()
 
 const route = useRoute()
 const form = useForm<{ date: Date | undefined }>({
   date: undefined,
 })
+
+const drawDates = computed<{
+  minDate?: string
+  maxDate?: string
+}>(() => ({
+  minDate: page.props?.metadata.oldestDrawDate,
+  maxDate: page.props?.metadata.newestDrawDate,
+}))
 
 const onSubmit = () => {
   form
@@ -43,6 +58,10 @@ onMounted(() => {
         v-model="form.date"
         label="A partir de: "
         name="date"
+        :date-picker-props="{
+          minDate: drawDates.minDate,
+          maxDate: drawDates.maxDate,
+        }"
         placeholder="dd/mm/aaaa"
       />
     </div>
