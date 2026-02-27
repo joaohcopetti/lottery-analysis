@@ -80,7 +80,7 @@ onBeforeMount(() => {
     <template #header> Mapa geral </template>
 
     <template #body>
-      <div class="mt-2 mb-4 flex gap-3">
+      <div class="mt-2 mb-4 flex flex-col gap-3">
         <AppToggle
           :model-value="lotteryStore.isHeatmapEnabled"
           label="Mapa de calor"
