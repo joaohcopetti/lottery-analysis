@@ -12,7 +12,9 @@ import { calendarDateKey } from './date-picker-injection-keys'
 const props = defineProps<{
   minDate?: string
 }>()
-const minDate = ref<Date>(new Date(props.minDate + ' 00:00'))
+const minDate = ref<Date>(
+  props.minDate ? new Date(props.minDate + ' 00:00:00') : new Date('1990-01-01 00:00:00'),
+)
 const selectedDate = inject(calendarDateKey) as Ref<CalendarDate>
 
 const monthsOptions = computed(() => {
@@ -72,6 +74,7 @@ const decrementMonth = () => {
 <template>
   <div class="flex items-center justify-between gap-2">
     <AppButton
+      type="button"
       :icon="IPhArrowLeftBold"
       color="light"
       @click="decrementMonth"
@@ -96,6 +99,7 @@ const decrementMonth = () => {
     </div>
 
     <AppButton
+      type="button"
       :icon="IPhArrowRightBold"
       color="light"
       @click="incrementMonth"
