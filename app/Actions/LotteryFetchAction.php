@@ -13,7 +13,7 @@ use App\Actions\LotteryCaixasXlsxFormatter;
 
 class LotteryFetchAction
 {
-    public function execute(LotteriesEnum $lottery): void
+    public function execute(LotteriesEnum $lottery): int
     {
         Cache::clear();
 
@@ -26,7 +26,7 @@ class LotteryFetchAction
 
         Storage::put($settings->base_filename . '.json', (string) json_encode($data));
 
-        LotteryResult::query()
+        return LotteryResult::query()
             ->insertOrIgnore(
                 $data->map(fn($result) => [
                     ...$result,

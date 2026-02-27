@@ -53,9 +53,9 @@ class FetchLotteryResultsCommand extends Command
         $lottery = LotteriesEnum::from($slug);
         $this->info("Fetching {$lottery->label()} info...");
 
-        app(LotteryFetchAction::class)->execute(LotteriesEnum::from($slug));
+        $insertedRows = app(LotteryFetchAction::class)->execute(LotteriesEnum::from($slug));
 
-        $this->info("Fetch finished.");
+        $this->info("Fetch finished ($insertedRows new rows).");
     }
 
     private function fetchAll(): void
