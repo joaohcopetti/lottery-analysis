@@ -4,5 +4,5 @@ export const getMonthName = (monthZeroBased: number) =>
   })
 
 export const dateToLocaleString = (date: string, options?: Intl.DateTimeFormatOptions) => {
-  return new Date(date + ' 00:00').toLocaleDateString(navigator.language, options)
+  return new Date(date + ' 00:00').toLocaleDateString()
 }
