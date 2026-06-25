@@ -3,6 +3,8 @@
 Projeto que fornece um painel para analisar os resultados das loterias Caixa, como Mega-Sena.
 
 ## Funcionalidades
+> A API oficial da Caixa parou de atualizar os resultados, último resultado é do dia 24/01/2026.
+
 - Automaticamente busca jogos das loterias com comando `php artisan app:lottery-fetch`.
 - Exibe em um grid semelhante aos cartões de jogos reais, com mapa de calor.
 - Ordenação por ocorrências ou jogos.
