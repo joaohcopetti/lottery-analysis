@@ -2,6 +2,13 @@
 
 Projeto que fornece um painel para analisar os resultados das loterias Caixa, como Mega-Sena.
 
+## Funcionalidades
+- Automaticamente busca jogos das loterias com comando `php artisan app:lottery-fetch`.
+- Exibe em um grid semelhante aos cartões de jogos reais, com mapa de calor.
+- Ordenação por ocorrências ou jogos.
+- Selecionar número para visualizar em destaque no painel.
+- Filtrar jogos por data.
+
 ## Demo
 <img width="1920" height="933" alt="Screenshot 2026-06-25 at 12-19-59 Lottery analysis" src="https://github.com/user-attachments/assets/23b13018-c8cc-4e6b-a487-ee357ad6b758" />
 <img width="1920" height="933" alt="Screenshot 2026-06-25 at 12-22-31 Lottery analysis" src="https://github.com/user-attachments/assets/355fc3d6-a141-4a2b-9b11-ed963d53f378" />
