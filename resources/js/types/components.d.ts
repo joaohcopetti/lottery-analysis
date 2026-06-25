@@ -9,6 +9,5 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     IPhCalendar: typeof import('~icons/ph/calendar')['default']
-    IPhCalendarFill: typeof import('~icons/ph/calendar-fill')['default']
   }
 }

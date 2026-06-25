@@ -9,11 +9,11 @@ const NAVBAR_ITEMS: MainNavbarItemProps[] = [
     label: 'Visão geral',
     url: route('main', route().params),
   },
-  {
-    icon: IPhChartPieSlice,
-    label: 'Dados estatísticos',
-    url: route('stats', route().params),
-  },
+  // {
+  //   icon: IPhChartPieSlice,
+  //   label: 'Dados estatísticos',
+  //   url: route('stats', route().params),
+  // },
 ]
 </script>
 
