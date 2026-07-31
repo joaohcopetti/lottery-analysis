@@ -40,42 +40,42 @@ class LotteryFetchAction
     {
         return match ($lottery) {
             LotteriesEnum::MEGA_SENA => new LotterySettingsData(
-                endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Mega-Sena',
+                endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Mega-Sena',
                 filename: 'mega-sena.xlsx',
                 formatter: new LotteryCaixasXlsxFormatter($lottery)
             ),
             LotteriesEnum::LOTOFACIL => new LotterySettingsData(
-                endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Lotofacil',
+                endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Lotofacil',
                 filename: 'lotofacil.xlsx',
                 formatter: new LotteryCaixasXlsxFormatter($lottery)
             ),
             LotteriesEnum::QUINA => new LotterySettingsData(
-                endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Quina',
+                endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Quina',
                 filename: 'quina.xlsx',
                 formatter: new LotteryCaixasXlsxFormatter($lottery)
             ),
                 // LotteriesEnum::LOTOMANIA => new LotterySettingsData(
-                //     endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Lotomania',
+                //     endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Lotomania',
                 //     filename: 'lotomania.xlsx',
                 //     formatter: new LotteryCaixasXlsxFormatter($lottery)
                 // ),
             LotteriesEnum::TIMEMANIA => new LotterySettingsData(
-                endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Timemania',
+                endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Timemania',
                 filename: 'timemania.xlsx',
                 formatter: new LotteryCaixasXlsxFormatter($lottery)
             ),
             LotteriesEnum::DUPLA_SENA => new LotterySettingsData(
-                endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Dupla-Sena',
+                endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Dupla-Sena',
                 filename: 'dupla-sena.xlsx',
                 formatter: new LotteryCaixasXlsxFormatter($lottery)
             ),
             LotteriesEnum::DIA_DE_SORTE => new LotterySettingsData(
-                endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Dia-de-Sorte',
+                endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Dia-de-Sorte',
                 filename: 'dia-de-sorte.xlsx',
                 formatter: new LotteryCaixasXlsxFormatter($lottery)
             ),
             LotteriesEnum::MAIS_MILIONARIA => new LotterySettingsData(
-                endpoint: 'https://servicebus2.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Milionaria',
+                endpoint: 'https://servicebus3.caixa.gov.br/portaldeloterias/api/resultados/download?modalidade=Milionaria',
                 filename: 'mais-milionaria.xlsx',
                 formatter: new LotteryCaixasXlsxFormatter($lottery)
             ),
